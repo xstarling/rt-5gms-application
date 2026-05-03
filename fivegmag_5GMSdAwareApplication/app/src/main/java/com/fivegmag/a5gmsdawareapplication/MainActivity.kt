@@ -10,6 +10,7 @@ https://drive.google.com/file/d/1cinCiA778IErENZ3JN52VFW-1ffHpx7Z/view
 package com.fivegmag.a5gmsdawareapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -32,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.InputStream
 import java.net.URI
 import java.util.*
+import kotlin.math.log
 
 
 const val TAG = "5GMS Aware Application"
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        Log.d(TAG, "CMCD-initializeRetrofitForM8InterfaceApi: \n"+url + "\n" +retrofitM8Interface.toString())
         m8InterfaceApi =
             retrofitM8Interface.create(M8InterfaceApi::class.java)
     }
@@ -153,6 +156,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private fun loadStream() {
         exoPlayerAdapter.stop()
         val serviceListEntry: ServiceListEntry = m8Data.serviceList[currentSelectedStreamIndex]
+        Log.d(TAG, "CMCD-loadStream: " + serviceListEntry.toString())
         mediaSessionHandlerAdapter.initializePlaybackByServiceListEntry(serviceListEntry)
     }
 
